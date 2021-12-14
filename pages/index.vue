@@ -24,7 +24,7 @@
       class="overflow-y-auto"
       max-height="100vh"
     >
-      <v-container fluid style=" margin-top:8rem">
+  
         <!-- SECTION 1 - HERO -->
         <section class="hero">
           <v-row>
@@ -66,7 +66,7 @@
             </v-col>
           </v-row>
         </section>
-
+        <!-- SECTION 2 - SERVICES -->
         <section class="services">
           <v-row class="services__wrap">
             <v-col cols="5"  class="services__hero">
@@ -81,77 +81,279 @@
             </v-col>
             <v-col cols="7">
               <div class="d-flex justify-start align-center flex-wrap">
-               <v-hover v-slot="{ hover }">
-                <v-card width="320px" class="services__card rounded-lg" :style="
+                <v-hover v-for="(el, idx) in card_services" :key="idx" v-slot="{ hover }">
+                <v-card height="" width="320px" class="services__card rounded-lg" :style="
                         hover
-                          ? 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.10);'
-                          : 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.06);'
+                          ? 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.20);'
+                          : 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.00);'
                       ">
                     <v-card-title class="services__card-title"> 
-                      <img class="mr-2"  :src="require('@/assets/images/icon-card/1.png')" alt="icon-grow-your-bussiness"> 
-                      Grow Your Bussiness
+                      <img class="mr-2"  :src="require(`@/assets/images/icon-card/${el.img_url}`)" :alt="el.img_alt"> 
+                      {{el.title}}
                     </v-card-title>
                       <div class="services__card-subtitle">
-                        grow your business by creating the perfect website
+                        {{el.description}}
                       </div>
                 </v-card>
-               </v-hover>
-               <v-hover v-slot="{ hover }">
-                <v-card width="320px" class="services__card rounded-lg" :style="
-                        hover
-                          ? 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.10);'
-                          : 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.06);'
-                      ">
-                    <v-card-title class="services__card-title"> 
-                      <img class="mr-2"  :src="require('@/assets/images/icon-card/2.png')" alt="icon-grow-your-bussiness"> 
-                      Bussiness Real Time Report
-                    </v-card-title>
-                      <div class="services__card-subtitle">
-                        serve the making of your report program in real time
-                      </div>
-                </v-card>
-               </v-hover>
-               <v-hover v-slot="{ hover }">
-                <v-card width="320px" class="services__card rounded-lg" :style="
-                        hover
-                          ? 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.10);'
-                          : 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.06);'
-                      ">
-                    <v-card-title class="services__card-title"> 
-                      <img class="mr-2"  :src="require('@/assets/images/icon-card/3.png')" alt="icon-grow-your-bussiness"> 
-                      Automate your business
-                    </v-card-title>
-                      <div class="services__card-subtitle">
-                        Serving automation to develop your project
-                      </div>
-                </v-card>
-               </v-hover>
-               <v-hover v-slot="{ hover }">
-                <v-card width="320px" class="services__card rounded-lg" :style="
-                        hover
-                          ? 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.10);'
-                          : 'box-shadow: 2px 7px 26px rgba(0, 0, 0, 0.06);'
-                      ">
-                    <v-card-title class="services__card-title"> 
-                      <img class="mr-2"  :src="require('@/assets/images/icon-card/4.png')" alt="icon-grow-your-bussiness"> 
-                      Update your website
-                    </v-card-title>
-                      <div class="services__card-subtitle">
-                        Our job is to help you develop a better website
-                      </div>
-                </v-card>
-               </v-hover>
+                </v-hover>
               </div>
               
             </v-col>
           </v-row>
         </section>
-      </v-container>
+        <!-- SECTION 3 - PROJECTS -->
+        <section class="projects">
+          <v-row >
+            <!-- HERO -->
+            <v-col cols="12">
+              <div class="projects__wrap d-flex justify-center flex-wrap align-center">
+                <div class="projects__hero">
+                <h1>The work of our team, from several clients</h1>
+                <p>The result of trust from our customers who have used the services of our team</p>
+              </div>
+              </div>
+              <v-container>
+              <v-img  style="width:750px; margin-top:1.7rem" :src="require('@/assets/images/project-slash.svg')"></v-img>
+              </v-container>
+            </v-col>
+            <!-- PROJECT PREVIEW -->
+            <v-col cols="12" class="preview">
+              <v-container>
+              <div class="d-flex justify-start flex-wrap" >
+              <v-card  v-for="(el,index) in card_portofolio"
+                elevation="0"
+                :loading="loading"
+                class="preview__card my-12"
+                max-width="540"
+                >
+                <template slot="progress">
+                  <v-progress-linear
+                    color="deep-purple"
+                    height="10"
+                    indeterminate
+                  ></v-progress-linear>
+                </template>
+
+                <v-img
+                  height="368"
+                  :src="require(`@/assets/images/portofolio/${el.img_url}`)"
+                ></v-img>
+
+                <v-card-title class="preview__card-title">
+                  <h3>{{el.title}}</h3>
+
+                  <v-spacer></v-spacer>
+
+                <div class="technology d-flex justify-start align-center flex-wrap" v-for="(item, idx) in el.tech_img">
+                  <v-img class="technology__img" :src="require(`@/assets/images/portofolio/tech/${item}.png`)"></v-img>
+                </div>
+              </v-card-title>
+
+              <v-card-actions class="preview__card-action">
+                <v-btn
+                  color="deep-purple lighten-2"
+                  text
+                  :href="el.url_link"
+                  target="_blank"
+                  class="font-italic font-weight-bold text-capitalize"
+                >
+                  Visit Site
+                </v-btn>
+              </v-card-actions>
+              </v-card>
+              </div>
+              </v-container>
+            </v-col>
+          </v-row>
+        </section>
+
+        <!-- SECTION 4 - HERO 2 ADVERTISEMENT -->
+        <section style="background:#F0F3FF;" class="advertisement">
+          <v-row>
+            <v-col cols="5" class="pa-0">
+              <v-img :src="require('@/assets/images/hero-2.svg')"></v-img>
+            </v-col>
+            <v-col cols="7" style="position:relative;" class="d-flex justify-start my-auto flex-column pa-0">
+             <div class="advertisement__hero">
+                <h1>Everyday our team develops <br> customer products.</h1>
+                <p>Our team's process is focused on designing and developing <br>products from our clients</p>
+                <v-img  style="width:250px;" :src="require('@/assets/images/slash-hero-2.svg')"></v-img>
+             </div>
+            </v-col>
+          </v-row>
+        </section>
+
+        <!-- SECTION 5 - HERO COLAB -->
+        <section class="colab">
+          <v-row>
+            <v-col cols="6"  class="d-flex align-center colab__left">
+              <div class="colab__title">
+                <h1>
+                  Collaboration between </br> our team
+                </h1>
+                <p>Our team believes that building a website is a cultural <br>
+                relationship between companies and customers for 
+                the better</p>
+              </div>
+            </v-col>
+            <v-col cols="6" class="colab__right">
+              <v-img class="colab__img" :src="require('@/assets/images/collaboration.svg')"></v-img>
+            </v-col>
+            
+            <!-- GAMBAR BUILDING WEBSITE -->
+            <v-col class="colab__img-hero" cols="12" align="center" justify="center">
+              <v-img :src="require('@/assets/images/building-website.svg')"></v-img>
+            </v-col>
+          </v-row>
+        </section>
+
+        <!-- SECTION 6 - OUR TECHNOLOGY -->
+        <section class="ourtech" style="background:#F0F3FF">
+          <v-row>
+            <v-col class="pa-0" cols="12">
+              <div class="ourtech__title">
+              <h1>
+                  Our Technology in Developing <br> Your Website
+              </h1>
+              </div>
+              <div class="d-flex justify-center flex-wrap align-center" style="padding:0 20rem;">
+                  <div v-for="(el, idx) in technology_we_used" :key="idx" class="ourtech__img-wrap ma-7">
+                    <img :src="require(`@/assets/images/technology/${el.img_src}`)" :alt="el.img_alt"></img>
+                  </div>
+              </div>
+            </v-col>
+          </v-row>
+        </section>
+
+        <!-- FOOTER -->
+        <section class="footer pa-0">
+          <v-card  color="#F0F3FF" elevation="0" height="442" class="footer__card d-flex  flex-column">
+            <div class="footer__card-title my-auto">
+              <h1>When you need <br> project contact us</h1>
+                 <div class="btn">
+                <v-hover  v-slot="{ hover }">
+                <v-btn width="150"  elevation="0"  :style="
+                      hover
+                        ? 'box-shadow: rgba(0, 0, 0, 0.20) 0px 4px 12px !important'
+                        : ''
+                    " style="height:50px; background: linear-gradient(94.5deg, #FE8D0D -7.68%, #EEB00F 109.25%); " rounded class="white--text font-weight-regular text-capitalize" >
+                  Lets Talk
+                  <v-icon class="white--text" right>mdi-arrow-right</v-icon>
+                </v-btn>
+                </v-hover>
+              </div>
+            </div>
+
+          
+          </v-card>
+        </section>
     </v-sheet>
   </v-card>
 </template>
 
+
+<script>
+export default {
+  data: () => ({
+    loading: false,
+    card_services: [
+      {
+        img_url: '1.png',
+        title: 'Grow Your Bussiness',
+        img_alt: 'icon image grow your bussiness',
+        description: 'grow your business by creating the perfect website',
+      },
+      {
+        img_url: '2.png',
+        title: 'Bussiness Real Time Report',
+        img_alt: 'icon Bussiness Real Time Report',
+        description: 'serve the making of your report program in real time',
+      },
+      {
+        img_url: '3.png',
+        title: 'Automate your business',
+        img_alt: 'Automate your business',
+        description: 'Serving automation to develop your project',
+      },
+      {
+        img_url: '4.png',
+        title: 'Upgrade your website',
+        img_alt: 'Upgrade your website',
+        description:
+          'Our job is to help you develop a better experiences website',
+      },
+    ],
+    card_portofolio: [
+      {
+        title: 'PT. Higlob Sinar Utama',
+        img_url: 'higlob.png',
+        tech_img: ['icon-figma', 'icon-nuxt', 'icon-mysql', 'icon-sass'],
+        url_link: 'https://www.higlob.id/',
+      },
+      {
+        title: 'Higlob Studio',
+        img_url: 'studio.png',
+        tech_img: ['icon-figma', 'icon-nuxt', 'icon-mysql', 'icon-sass'],
+        url_link: 'https://www.higlob.id/',
+      },
+    ],
+    technology_we_used: [
+      {
+        img_src: 'figma.png',
+        img_alt: 'logo-Figma',
+      },
+      {
+        img_src: 'html.png',
+        img_alt: 'logo-Html',
+      },
+      {
+        img_src: 'css.png',
+        img_alt: 'logo-CSS',
+      },
+      {
+        img_src: 'js.png',
+        img_alt: 'logo-Javascript',
+      },
+      {
+        img_src: 'vue.png',
+        img_alt: 'logo-Vue',
+      },
+      {
+        img_src: 'firebase.png',
+        img_alt: 'logo-Firebase',
+      },
+      {
+        img_src: 'mysql.png',
+        img_alt: 'logo-Mysql',
+      },
+      {
+        img_src: 'laravel.png',
+        img_alt: 'logo-Laravel',
+      },
+      {
+        img_src: 'bootstrap.png',
+        img_alt: 'logo-Boostrap',
+      },
+      {
+        img_src: 'sass.png',
+        img_alt: 'logo-Sass',
+      },
+      {
+        img_src: 'nuxt.png',
+        img_alt: 'logo-Nuxt',
+      },
+    ],
+  }),
+}
+</script>
+
+
 <style lang="scss">
+.v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined) {
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 0%), 0px 4px 5px 0px rgb(0 0 0 / 10%),
+    0px 14px 4px rgb(0 0 0 / 4%);
+}
+
 $red: #f37272;
 $duration: 0.5s;
 $distance: 8px;
@@ -219,8 +421,6 @@ a {
 /* exact link will show the primary color for only the exact matching link */
 a.nuxt-link-exact-active {
   font-weight: 600;
-  // color: #f37272 !important;
-  // border-bottom: 3px solid #FE7624;
 }
 
 /** 
@@ -234,6 +434,7 @@ STYLE
 }
 
 .hero {
+  margin-top: 10rem;
   &__text {
     margin-left: 6rem;
 
@@ -254,6 +455,10 @@ STYLE
       line-height: 14px;
     }
   }
+}
+
+.btn {
+  margin-top: 3rem;
 }
 
 // SERVICES
@@ -295,7 +500,7 @@ STYLE
   }
 
   &__card {
-    margin:10px;
+    margin: 10px;
     padding: 5px;
     &-title {
       padding: 5px;
@@ -308,24 +513,196 @@ STYLE
       text-align: center;
       letter-spacing: 0.003em;
     }
-    
+
     &-subtitle {
       padding: 5px;
-    font-family: $font-inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 18px;
-    /* or 138% */
-    text-align: left;
-    letter-spacing: 0.003em;
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 18px;
+      /* or 138% */
+      text-align: left;
+      letter-spacing: 0.003em;
 
-    color: #828282;
+      color: #828282;
     }
   }
 }
 
-.btn {
-  margin-top: 3rem;
+//PROJECTS
+.projects {
+  margin-top: 4rem;
+  &__hero {
+    text-align: left;
+    h1 {
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 39px;
+      line-height: 25px;
+      /* identical to box height, or 64% */
+      letter-spacing: 0.003em;
+      /* FONT COLOUR */
+      color: #2e186a;
+    }
+
+    p {
+      margin-top: 2rem;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 24px;
+      /* identical to box height, or 133% */
+      letter-spacing: 0.003em;
+
+      color: #828282;
+    }
+  }
+}
+
+//PREVIEW
+.preview {
+  &__card {
+    margin: 20px;
+    &-title {
+      padding-left: 8px;
+      padding-right: 0;
+      padding-top: 1.5rem;
+      h3 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        /* identical to box height, or 133% */
+
+        letter-spacing: 0.003em;
+
+        /* font */
+        color: #1e1b1b;
+      }
+
+      .technology {
+        &__img {
+          margin: 0 8px;
+        }
+      }
+    }
+
+    &-action {
+      padding: 0;
+    }
+  }
+}
+
+//ADVERTISEMENT
+.advertisement {
+  margin-top: 1rem;
+  &__hero {
+    // margin-top: 3.8rem;
+
+    h1 {
+      // margin-top: 1rem;
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 39px;
+      line-height: 50px;
+      /* or 128% */
+      /* FONT COLOUR */
+      color: #2e186a;
+    }
+
+    p {
+      margin-top: 1.5rem;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      /* or 167% */
+      letter-spacing: 0.003em;
+      color: #545f8d;
+    }
+  }
+}
+
+//COLLABORATION
+.colab {
+  margin-top: 1rem;
+  padding: 5rem;
+  &__title {
+    h1 {
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 39px;
+      line-height: 50px;
+      margin-bottom: 1.5rem;
+      /* or 128% */
+      /* FONT COLOUR */
+      color: #2e186a;
+    }
+
+    p {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      /* or 167% */
+      letter-spacing: 0.003em;
+    }
+  }
+
+  &__img-hero {
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+  }
+}
+
+//TECHNOLOGY WE USED
+.ourtech {
+  padding-bottom: 10rem;
+  &__title {
+    h1 {
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 39px;
+      line-height: 60px;
+      /* or 154% */
+
+      text-align: center;
+      letter-spacing: 0.003em;
+
+      /* FONT COLOUR */
+
+      color: #2e186a;
+    }
+  }
+}
+
+//FOOTER
+.footer {
+  &__card {
+    background-image: url('@/assets/images/Footer.svg');
+    background-color: #f0f3ff;
+
+    &-title {
+      padding-top: 5rem;
+      padding-left: 5rem;
+      font-family: $font-inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 50px;
+      /* or 128% */
+
+      letter-spacing: 0.003em;
+
+      color: #ffffff;
+    }
+  }
 }
 </style>
