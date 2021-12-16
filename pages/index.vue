@@ -1,34 +1,62 @@
 <template>
   <v-card class="overflow-hidden">
+    <!-- NAVBAR -->
     <v-app-bar
       absolute
       color="white"
       elevate-on-scroll
       scroll-target="#scrolling-techniques-7"
     >
+    
+    <div
+        style="width: 100%"
+        :class="$vuetify.breakpoint.mdAndDown ? 'd-flex ' : 'd-none'"
+      >
+        <v-toolbar-title class="d-flex align-center ml-3">
+          <img
+            style="width: 100px"
+            :src="require('@/assets/images/logo.png')"
+            alt="logo higlob"
+          />
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+
+        <v-app-bar-nav-icon class="mr-0" 
+          ><img :src="require('@/assets/images/bar-chart.png')" alt="btn-toggle-navbar"
+        /></v-app-bar-nav-icon>
+      </div>
+      
+      <div :class="$vuetify.breakpoint.mdAndDown ? 'd-none' : 'd-flex'">
       <v-toolbar-title class="nav__pa-left"
             ><v-img :src="require('@/assets/images/logo.png')"></v-img>
-          </v-toolbar-title>
+      </v-toolbar-title>
 
           <v-spacer></v-spacer>
-          <div class="d-flex justify-center align-center nav__pa-right">
-            <ul>
-              <li><NuxtLink class="navbar__item" to="/">Work</a></NuxtLink></li>
-              <li><NuxtLink class="navbar__item" to="/about">About</a></NuxtLink></li>
-              <li><NuxtLink class="navbar__item" to="/contact">Contact</a></NuxtLink></li>
-            </ul>
-          </div>
+      <div class=" d-flex justify-center align-center nav__pa-right">
+        <ul class="d-none">
+          <li><NuxtLink class="navbar__item" to="/">Work</NuxtLink></li>
+          <li><NuxtLink class="navbar__item" to="/about">About</NuxtLink></li>
+          <li><NuxtLink class="navbar__item" to="/contact">Contact</NuxtLink></li>
+        </ul>
+      </div>
+      </div>
+      
     </v-app-bar>
+    <!-- CONTENT -->
     <v-sheet
       id="scrolling-techniques-7"
       class="overflow-y-auto"
       max-height="100vh"
     >
-  
         <!-- SECTION 1 - HERO -->
         <section class="hero">
           <v-row>
-            <v-col cols="8">
+            <v-col cols="12" xs="12" sm="8" md="8" lg="8" xl="8">
+              <div data-aos="fade-up"
+              data-aos-offset="200"
+              data-aos-delay="50"
+              data-aos-duration="1500"
+              data-aos-anchor-placement="top-center">
               <div class="hero__text">
               <h1>Developing your Website is Our Solution.</h1>
 
@@ -46,22 +74,27 @@
                 </v-hover>
               </div>
             </div>
+              </div>
 
             <v-row>
               <v-col cols="12" class="pa-0" style="margin-top:5rem">
-                <div style="position:relative; ">
+                <div style="position:relative;">
                 <v-img width="20vh":src="require('@/assets/images/buku.png')">
                 </v-img>
               </div>
             </v-col>
             </v-row>
-
             </v-col>
             
-            <v-col cols="4" class="pa-0">
+            <v-col cols="12" xs="12" sm="4" md="4" lg="4" xl="4" class="pa-0">
               <div style="position:relative;">
-                <img style="position:absolute; right:0; top:10%;" :src="require('@/assets/images/hero_img.png')" >
-                </v-img>
+                <div data-aos="fade-down"
+              data-aos-offset="200"
+              data-aos-delay="50"
+              data-aos-duration="1500"
+              data-aos-anchor-placement="top-center">
+                <img style="position:absolute; right:0; top:10%;" :src="require('@/assets/images/hero-move.svg')" >
+                </div>
               </div>
             </v-col>
           </v-row>
@@ -69,7 +102,7 @@
         <!-- SECTION 2 - SERVICES -->
         <section class="services">
           <v-row class="services__wrap">
-            <v-col cols="5"  class="services__hero">
+            <v-col cols="5" class="services__hero">
               <h2>
                 The services we will <br>
                 use to build your project
@@ -97,7 +130,6 @@
                 </v-card>
                 </v-hover>
               </div>
-              
             </v-col>
           </v-row>
         </section>
@@ -119,6 +151,7 @@
             <!-- PROJECT PREVIEW -->
             <v-col cols="12" class="preview">
               <v-container>
+                
               <div class="d-flex justify-start flex-wrap" >
               <v-card  v-for="(el,index) in card_portofolio"
                 elevation="0"
@@ -174,11 +207,11 @@
               <v-img :src="require('@/assets/images/hero-2.svg')"></v-img>
             </v-col>
             <v-col cols="7" style="position:relative;" class="d-flex justify-start my-auto flex-column pa-0">
-             <div class="advertisement__hero">
+            <div class="advertisement__hero">
                 <h1>Everyday our team develops <br> customer products.</h1>
                 <p>Our team's process is focused on designing and developing <br>products from our clients</p>
                 <v-img  style="width:250px;" :src="require('@/assets/images/slash-hero-2.svg')"></v-img>
-             </div>
+            </div>
             </v-col>
           </v-row>
         </section>
@@ -344,11 +377,18 @@ export default {
       },
     ],
   }),
+  mounted() {},
 }
 </script>
 
 
 <style lang="scss">
+//shadow navbar mobile
+// .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined) {
+// box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 0%), 0px 4px 5px 0px rgb(0 0 0 / 10%), 0px 14px 4px rgb(0 0 0 / 2%);
+// }
+
+//shadow navbar desktop
 .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined) {
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 0%), 0px 4px 5px 0px rgb(0 0 0 / 10%),
     0px 14px 4px rgb(0 0 0 / 4%);
@@ -374,50 +414,52 @@ ul {
     display: inline-block;
     margin: 0 15px;
   }
-}
-a {
-  font-size: 16px;
-  color: #2e186a !important;
-  position: relative;
-  text-transform: capitalize;
-  text-decoration: none;
-  padding-bottom: 5px;
 
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 0;
+  a {
+    font-size: 16px;
+    color: #2e186a !important;
+    position: relative;
+    text-transform: capitalize;
+    text-decoration: none;
+    padding-bottom: 5px;
 
-    right: 0;
-    height: 3px;
-    background-color: $red;
-  }
-  &:before {
-    opacity: 0;
-    transform: translateY(-$distance);
-    transition: transform 0s $easeOutBack, opacity 0s;
-  }
-  &:after {
-    opacity: 0;
-    transform: translateY($distance/2);
-    transition: transform $duration $easeOutBack, opacity $duration;
-  }
-  &:hover {
     &:before,
     &:after {
-      opacity: 1;
-      transform: translateY(0);
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+
+      right: 0;
+      height: 3px;
+      background-color: $red;
     }
     &:before {
-      transition: transform $duration $easeOutBack, opacity $duration;
+      opacity: 0;
+      transform: translateY(-$distance);
+      transition: transform 0s $easeOutBack, opacity 0s;
     }
     &:after {
-      transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
+      opacity: 0;
+      transform: translateY($distance/2);
+      transition: transform $duration $easeOutBack, opacity $duration;
+    }
+    &:hover {
+      &:before,
+      &:after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      &:before {
+        transition: transform $duration $easeOutBack, opacity $duration;
+      }
+      &:after {
+        transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
+      }
     }
   }
 }
+
 /* exact link will show the primary color for only the exact matching link */
 a.nuxt-link-exact-active {
   font-weight: 600;
@@ -704,5 +746,12 @@ STYLE
       color: #ffffff;
     }
   }
+}
+
+// MEDIA QUERY
+@media screen and (min-width: 300px) and (max-width: 600px) {
+}
+
+@media screen and (min-width: 600px) and (max-width: 960px) {
 }
 </style>
